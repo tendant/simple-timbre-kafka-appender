@@ -1,4 +1,4 @@
-(defproject simple-timbre-kafka-appender "0.1.0-SNAPSHOT"
+(defproject simple-timbre-kafka-appender "0.1.0"
   :description "Yet another simple timbre kafka appender"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
