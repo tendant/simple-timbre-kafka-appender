@@ -47,3 +47,15 @@
             record (ProducerRecord. topic-name output)]
         (.send p record)))))
 
+(comment
+  (defn test-timbre-info []
+    (let [bootstrap-servers ["localhost:9092"]
+          topic-name "test"]
+      (timbre/merge-config! {:level :info
+                             :output-fn (partial timbre/default-output-fn {:stacktrace-fonts {}}) ; disable color on stacktrace
+                             :appenders {:kafka {:enabled? true
+                                                 :async? true
+                                                 ;; :output-fn  :inherit
+                                                 :fn (kafka-appender bootstrap-servers topic-name)}}})
+      (timbre/info "test info")))
+  )
