@@ -4,7 +4,16 @@ A Clojure library designed to ... well, that part is up to you.
 
 ## Usage
 
-FIXME
+```clojure
+(let [bootstrap-servers ["localhost:9092"]
+          topic-name "test"]
+      (timbre/merge-config! {:level :info
+                             :appenders {:kafka {:enabled? true
+                                                 :async? true
+                                                 ;; :output-fn  :inherit
+                                                 :fn (kafka-appender bootstrap-servers topic-name)}}})
+      (timbre/info "test info"))
+```
 
 ## License
 
