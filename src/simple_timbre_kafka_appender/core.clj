@@ -8,7 +8,6 @@
 
 (defn log-data->json
   [data opts]
-  ;; Note: this it meant to target the logstash-filter-json; especially "message" and "@timestamp" get a special meaning there.
   (let [stacktrace-str (if-let [pr (:pr-stacktrace opts)]
                          #(with-out-str (pr %))
                          #(timbre/stacktrace % {:stacktrace-fonts {}}))]
@@ -43,7 +42,6 @@
   (let [p (make-producer kafka-bootstrap-servers)]
     (fn [m]
       (let [output (.getBytes (log-data->json m nil) "UTF-8")
-            _ (println "timbre.info:" (String. output))
             record (ProducerRecord. topic-name output)]
         (.send p record)))))
 
